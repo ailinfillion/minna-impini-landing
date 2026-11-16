@@ -740,7 +740,9 @@ section {
   display: block;
   width: min(100%, 440px);
   height: auto;
-  justify-self: center;
+  /* pegada al borde derecho de la tarjeta (el recorte original termina ahí) */
+  justify-self: end;
+  margin-right: calc(var(--pad) * -1);
 }
 @media (min-width: 800px) {
   .delegate__grid {
@@ -754,6 +756,7 @@ section {
     width: 100%;
     max-width: 540px;
     justify-self: end;
+    margin-right: calc(var(--pad) * -1);
   }
 }
 
@@ -1310,12 +1313,13 @@ section {
   position: relative;
   width: min(88vw, 500px);
   aspect-ratio: 900 / 1065;
-  margin: 2.5rem auto 0;
+  /* pegada al borde derecho de la pantalla */
+  margin: 2.5rem calc(var(--pad) * -1) 0 auto;
 }
 .cta__back {
   position: absolute;
   left: 4%;
-  right: 4%;
+  right: 0;
   bottom: 0;
   height: 76%;
   background: var(--pink);
@@ -1348,7 +1352,7 @@ section {
     width: 100%;
     max-width: 560px;
     justify-self: end;
-    margin: 0;
+    margin: 0 calc(var(--pad) * -1) 0 0;
   }
   .cta__title {
     margin-top: 0;
