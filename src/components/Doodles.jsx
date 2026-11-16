@@ -8,12 +8,14 @@ const base = {
   'aria-hidden': true,
 }
 
-export const Flower = (p) => (
-  <svg {...base} {...p}>
-    {[0, 60, 120, 180, 240, 300].map((r) => (
-      <ellipse key={r} cx="50" cy="29" rx="10" ry="19" transform={`rotate(${r} 50 50)`} />
-    ))}
-    <circle cx="50" cy="50" r="5" />
+// Flor del logo: es una máscara, toma el color del texto (currentColor).
+export const Flower = ({ className = '', style }) => (
+  <span aria-hidden className={`flower ${className}`} style={style} />
+)
+
+export const Check = (p) => (
+  <svg {...base} strokeWidth={9} {...p}>
+    <path d="M20 54 L42 76 L82 26" />
   </svg>
 )
 

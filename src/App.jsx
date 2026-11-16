@@ -8,7 +8,12 @@ import Marquee from './components/Marquee'
 import Statement from './components/Statement'
 import Tasks from './components/Tasks'
 import Delegate from './components/Delegate'
+import Process from './components/Process'
+import Cases from './components/Cases'
+import Packs from './components/Packs'
 import Cta from './components/Cta'
+import { Flower } from './components/Doodles'
+import { SITE } from './config'
 
 const motionOk = typeof window !== 'undefined' && window.matchMedia(OK).matches
 
@@ -47,8 +52,21 @@ export default function App() {
         <Statement />
         <Tasks />
         <Delegate />
+        <Process />
+        <Cases />
+        <Packs />
         <Cta />
       </main>
+      <footer className="footer">
+        <Flower className="footer__flower" />
+        <span className="footer__brand">MINNA</span>
+        <span>
+          © {new Date().getFullYear()} {SITE.name} · {SITE.role}
+        </span>
+        <a href="https://www.instagram.com/daianaimpini" target="_blank" rel="noreferrer">
+          @daianaimpini
+        </a>
+      </footer>
     </>
   )
 }

@@ -3,6 +3,8 @@ import { gsap, useGSAP, parallax, OK, FINE } from '../lib/motion'
 import SplitWords from './SplitWords'
 import { Flower, Squiggle, Star, Heart, Spiral, Camera, Chart } from './Doodles'
 import { SITE } from '../config'
+import wordmark from '../assets/img/wordmark.png'
+import saludo from '../assets/img/minna-saludo.webp'
 
 export default function Hero({ ready }) {
   const root = useRef()
@@ -15,8 +17,8 @@ export default function Hero({ ready }) {
       mm.add(OK, () => {
         const t = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } })
         t.from('.hero__nav > *', { y: -20, opacity: 0, duration: 0.8, stagger: 0.1 })
-          .from('.hero__photo', { scale: 0.55, opacity: 0, rotate: -8, duration: 1.5, ease: 'expo.out' }, 0)
-          .from('.hero__back', { scale: 0, duration: 1.4, ease: 'expo.out' }, 0.15)
+          .from('.hero__back', { scaleY: 0, transformOrigin: '50% 100%', duration: 1.3, ease: 'expo.out' }, 0.1)
+          .from('.hero__photo', { y: 90, opacity: 0, scale: 0.92, transformOrigin: '50% 100%', duration: 1.4, ease: 'expo.out' }, 0.25)
           .from('.hero__title .wi', { yPercent: 115, rotate: 6, duration: 1.1, stagger: 0.08 }, 0.2)
           .from('.hero__tag', { scale: 0, rotate: -25, duration: 0.9, ease: 'back.out(2)' }, '-=0.6')
           .from('.hero__sub, .hero__cta', { y: 24, opacity: 0, duration: 0.9, stagger: 0.12 }, '-=0.7')
@@ -61,7 +63,7 @@ export default function Hero({ ready }) {
       <nav className="hero__nav">
         <span className="logo">
           <Flower className="logo__flower" />
-          MINNA
+          <img className="logo__word" src={wordmark} alt="MINNA" height="34" />
         </span>
         <a className="pill" href={SITE.instagramDM} target="_blank" rel="noreferrer">
           Escribime
@@ -78,35 +80,34 @@ export default function Hero({ ready }) {
         </a>
       </div>
 
-      <div className="hero__photo-wrap" data-speed="-0.08">
+      <div className="hero__stage" data-speed="-0.05">
         <div className="hero__back" />
-        <div className="hero__photo">
-          <img
-            src={`${import.meta.env.BASE_URL}img/minna.jpg`}
-            width="1080"
-            height="1350"
-            alt="Minna, community manager, saludando"
-            fetchPriority="high"
-          />
-        </div>
-        <span className="doodle" data-depth="1.2" style={{ top: '-4%', right: '-2%' }}>
+        <img
+          className="hero__photo"
+          src={saludo}
+          width="900"
+          height="900"
+          alt="Minna, community manager, saludando"
+          fetchPriority="high"
+        />
+        <span className="doodle" data-depth="1.2" style={{ top: '4%', right: '2%' }}>
           <Camera className="d float" style={{ width: 54, color: 'var(--lime)' }} />
         </span>
-        <span className="doodle" data-depth="0.8" style={{ bottom: '12%', left: '-6%' }}>
-          <Chart className="d float float--b" style={{ width: 48, color: 'var(--pink)' }} />
+        <span className="doodle" data-depth="0.8" style={{ bottom: '30%', left: '-2%' }}>
+          <Chart className="d float float--b" style={{ width: 48, color: 'var(--green)' }} />
         </span>
-        <span className="doodle" data-depth="1.6" style={{ top: '38%', right: '-8%' }}>
-          <Heart className="d float float--c" style={{ width: 34, color: 'var(--pink)' }} />
+        <span className="doodle" data-depth="1.6" style={{ top: '34%', right: '-2%' }}>
+          <Heart className="d float float--c" style={{ width: 34, color: 'var(--green)' }} />
         </span>
       </div>
 
       <span className="doodle" data-depth="1" style={{ top: '13%', right: '8%' }}>
         <Star className="d float" style={{ width: 30, color: 'var(--lime)' }} />
       </span>
-      <span className="doodle hide-sm" data-depth="1.4" style={{ bottom: '8%', left: '42%' }}>
+      <span className="doodle hide-sm" data-depth="1.4" style={{ bottom: '12%', left: '46%' }}>
         <Spiral className="d float float--b" style={{ width: 70, color: 'var(--lime)' }} />
       </span>
-      <span className="doodle" data-depth="0.6" style={{ bottom: '4%', left: '6%' }}>
+      <span className="doodle" data-depth="0.6" style={{ bottom: '22%', left: '5%' }}>
         <Squiggle className="d float float--c" style={{ width: 90, color: 'var(--pink)' }} />
       </span>
     </section>
