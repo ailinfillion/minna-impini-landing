@@ -28,6 +28,7 @@ export default function Tasks() {
             duration: 0.9,
             stagger: 0.08,
             ease: 'power4.out',
+            clearProps: 'all', // libera el hover del CSS al terminar
           }).from(li.querySelector('.task__line'), { scaleX: 0, duration: 1.1, ease: 'expo.out' }, 0)
         })
 

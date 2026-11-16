@@ -30,34 +30,69 @@ const CASES = [
   },
 ]
 
+const clamp = (v) => Math.min(100, Math.max(0, v))
+
+// El divisor se arrastra desde cualquier punto de la imagen (no solo desde la barra).
 function BeforeAfter({ before, after, pos, setPos, onTouch }) {
+  const box = useRef()
+  const dragging = useRef(false)
+
+  const moveTo = (e) => {
+    const r = box.current.getBoundingClientRect()
+    setPos(clamp(((e.clientX - r.left) / r.width) * 100))
+  }
+
+  const onKeyDown = (e) => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+    e.preventDefault()
+    onTouch()
+    setPos((p) => clamp(p + (e.key === 'ArrowRight' ? 5 : -5)))
+  }
+
   return (
-    <div className="ba" style={{ '--pos': `${pos}%` }}>
-      <img className="ba__img" src={before} width="640" height="1053" alt="Perfil de Instagram antes del trabajo" />
-      <img
-        className="ba__img ba__img--after"
-        src={after}
-        width="640"
-        height="1053"
-        alt="Perfil de Instagram después del trabajo"
-      />
-      <span className="ba__tag ba__tag--l">Antes</span>
-      <span className="ba__tag ba__tag--r">Después</span>
-      <span className="ba__line" aria-hidden>
-        <span className="ba__knob">‹ ›</span>
-      </span>
-      <input
-        className="ba__range"
-        type="range"
-        min="0"
-        max="100"
-        step="0.5"
-        value={pos}
+    <div className="ba-wrap">
+      <div className="ba__labels" aria-hidden>
+        <span className="ba__lab ba__lab--l" style={{ opacity: pos > 22 ? 1 : 0.35 }}>
+          Antes
+        </span>
+        <span className="ba__lab ba__lab--r" style={{ opacity: pos < 78 ? 1 : 0.35 }}>
+          Después
+        </span>
+      </div>
+      <div
+        ref={box}
+        className="ba"
+        role="slider"
+        tabIndex={0}
         aria-label="Deslizá para comparar antes y después"
-        onPointerDown={onTouch}
-        onKeyDown={onTouch}
-        onChange={(e) => setPos(parseFloat(e.target.value))}
-      />
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(pos)}
+        style={{ '--pos': `${pos}%` }}
+        onPointerDown={(e) => {
+          onTouch()
+          dragging.current = true
+          box.current.setPointerCapture(e.pointerId)
+          moveTo(e)
+        }}
+        onPointerMove={(e) => dragging.current && moveTo(e)}
+        onPointerUp={() => (dragging.current = false)}
+        onPointerCancel={() => (dragging.current = false)}
+        onKeyDown={onKeyDown}
+      >
+        <img className="ba__img" src={before} width="640" height="1053" alt="Perfil de Instagram antes del trabajo" draggable="false" />
+        <img
+          className="ba__img ba__img--after"
+          src={after}
+          width="640"
+          height="1053"
+          alt="Perfil de Instagram después del trabajo"
+          draggable="false"
+        />
+        <span className="ba__line" aria-hidden>
+          <span className="ba__knob">‹ ›</span>
+        </span>
+      </div>
     </div>
   )
 }

@@ -88,6 +88,7 @@ export default function Cta() {
       <Flower className="cta__flower" />
       <Camera className="cta__camera float" />
 
+      <div className="cta__main">
       <SplitWords as="h2" className="cta__title" text="Vos ocupate de tu *negocio.*" mask />
       <div className="cta__sub">
         <p>
@@ -124,6 +125,7 @@ export default function Cta() {
           <a href="mailto:deniseimpini@gmail.com">deniseimpini@gmail.com</a>
         </li>
       </ul>
+      </div>
 
       <div className="cta__stage">
         <div className="cta__back" />

@@ -16,12 +16,12 @@ export default function Hero({ ready }) {
 
       mm.add(OK, () => {
         const t = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } })
-        t.from('.hero__nav > *', { y: -20, opacity: 0, duration: 0.8, stagger: 0.1 })
+        t.from('.hero__nav > *', { y: -20, opacity: 0, duration: 0.8, stagger: 0.1, clearProps: 'all' })
           .from('.hero__back', { scaleY: 0, transformOrigin: '50% 100%', duration: 1.3, ease: 'expo.out' }, 0.1)
           .from('.hero__photo', { y: 90, opacity: 0, scale: 0.92, transformOrigin: '50% 100%', duration: 1.4, ease: 'expo.out' }, 0.25)
           .from('.hero__title .wi', { yPercent: 115, rotate: 6, duration: 1.1, stagger: 0.08 }, 0.2)
           .from('.hero__tag', { scale: 0, rotate: -25, duration: 0.9, ease: 'back.out(2)' }, '-=0.6')
-          .from('.hero__sub, .hero__cta', { y: 24, opacity: 0, duration: 0.9, stagger: 0.12 }, '-=0.7')
+          .from('.hero__sub, .hero__cta', { y: 24, opacity: 0, duration: 0.9, stagger: 0.12, clearProps: 'all' }, '-=0.7')
           .from('.doodle', { scale: 0, opacity: 0, duration: 0.8, stagger: 0.07, ease: 'back.out(2.5)' }, '-=1.1')
         intro.current = t
 

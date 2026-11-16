@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { gsap, useGSAP, parallax, revealWords, OK } from '../lib/motion'
 import SplitWords from './SplitWords'
 import { Squiggle, Heart } from './Doodles'
-import { SITE } from '../config'
 
 const PACKS = [
   { name: 'Pack Básico', items: ['4 posteos mensuales', '8 historias mensuales'], price: '$100.000' },
@@ -32,6 +31,7 @@ export default function Packs() {
           duration: 1,
           stagger: 0.14,
           ease: 'power4.out',
+          clearProps: 'all', // al terminar, el hover del CSS vuelve a funcionar
           scrollTrigger: { trigger: '.packs__grid', start: 'top 88%', once: true },
         })
         gsap.from('.pay > *', {
@@ -70,9 +70,6 @@ export default function Packs() {
             <p className="pack__price">
               <b>{p.price}</b> / mes
             </p>
-            <a className="pack__cta" href={SITE.instagramDM} target="_blank" rel="noreferrer">
-              Consultar
-            </a>
           </article>
         ))}
       </div>
