@@ -66,6 +66,9 @@ export default function App() {
         <a href="https://www.instagram.com/daianaimpini" target="_blank" rel="noreferrer">
           @daianaimpini
         </a>
+        <p className="footer__credit">
+          Creado por <a href="mailto:ailinfillion@gmail.com">ailinfillion</a>
+        </p>
       </footer>
     </>
   )

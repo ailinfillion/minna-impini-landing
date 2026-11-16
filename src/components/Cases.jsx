@@ -33,7 +33,7 @@ const CASES = [
 const clamp = (v) => Math.min(100, Math.max(0, v))
 
 // El divisor se arrastra desde cualquier punto de la imagen (no solo desde la barra).
-function BeforeAfter({ before, after, pos, setPos, onTouch }) {
+function BeforeAfter({ cases, active, pos, setPos, onTouch }) {
   const box = useRef()
   const dragging = useRef(false)
 
@@ -80,15 +80,29 @@ function BeforeAfter({ before, after, pos, setPos, onTouch }) {
         onPointerCancel={() => (dragging.current = false)}
         onKeyDown={onKeyDown}
       >
-        <img className="ba__img" src={before} width="640" height="1053" alt="Perfil de Instagram antes del trabajo" draggable="false" />
-        <img
-          className="ba__img ba__img--after"
-          src={after}
-          width="640"
-          height="1053"
-          alt="Perfil de Instagram después del trabajo"
-          draggable="false"
-        />
+        {/* todas las cuentas viven en el DOM: cambiar de una a otra no carga imágenes */}
+        {cases.map((k, i) => (
+          <div className={`ba__set ${i === active ? 'is-on' : ''}`} key={k.id} aria-hidden={i !== active}>
+            <img
+              className="ba__img"
+              src={k.imgs[0]}
+              width="640"
+              height="1053"
+              alt={i === active ? `Perfil de ${k.name} antes del trabajo` : ''}
+              draggable="false"
+              decoding="sync"
+            />
+            <img
+              className="ba__img ba__img--after"
+              src={k.imgs[1]}
+              width="640"
+              height="1053"
+              alt={i === active ? `Perfil de ${k.name} después del trabajo` : ''}
+              draggable="false"
+              decoding="sync"
+            />
+          </div>
+        ))}
         <span className="ba__line" aria-hidden>
           <span className="ba__knob">‹ ›</span>
         </span>
@@ -175,7 +189,7 @@ export default function Cases() {
       </div>
 
       <div className="cases__stage">
-        <BeforeAfter before={c.imgs[0]} after={c.imgs[1]} pos={pos} setPos={setPos} onTouch={stopDemo} />
+        <BeforeAfter cases={CASES} active={active} pos={pos} setPos={setPos} onTouch={stopDemo} />
 
         <div className="cases__info" key={c.id}>
           <p className="cases__moves">

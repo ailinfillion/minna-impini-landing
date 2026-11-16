@@ -1,3 +1,12 @@
+/* Vintage Valentine (SiapGraph): subset latino. Ver nota de licencia en README.md */
+@font-face {
+  font-family: 'Vintage Valentine';
+  src: url('./assets/fonts/vintage-valentine.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* paleta oficial MINNA */
   --black: #000000;
@@ -10,7 +19,6 @@
   --olive: #75724f;
   --sage: #a5a58f;
 
-  /* Vintage Valentine y Conteza no están cargadas todavía: ver README */
   --font-display: 'Vintage Valentine', 'Bagel Fat One', 'Chewy', system-ui, sans-serif;
   --font-body: 'Comfortaa', system-ui, sans-serif;
   --font-hand: 'Caveat Brush', cursive;
@@ -731,38 +739,28 @@ section {
   overflow: hidden;
 }
 .process__inner {
-  display: grid;
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items: center;
-}
-.process__media {
   position: relative;
-  width: min(86vw, 460px);
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.process__blob {
+  position: absolute;
+  z-index: 0;
+  width: 70vw;
+  max-width: 480px;
   aspect-ratio: 1;
-  justify-self: center;
-}
-.process__back {
-  position: absolute;
-  inset: 6% 4% 0;
-  background: var(--pink);
-  border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%;
-  animation: morph 10s ease-in-out infinite;
-}
-.process__laptop {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: auto;
+  top: -6%;
+  right: -28%;
+  opacity: 0.45;
 }
 .process__star {
   position: absolute;
   width: 34px;
   color: var(--lime);
-  top: 4%;
-  right: 6%;
+  /* al lado del garabato, debajo del título */
+  top: calc(clamp(2.6rem, 10vw, 6rem) + 1.4rem);
+  left: 9rem;
 }
 .process__title {
   font-family: var(--font-display);
@@ -798,10 +796,10 @@ section {
   font-weight: 300;
   max-width: 42ch;
 }
-@media (min-width: 900px) {
-  .process__inner {
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 5rem;
+@media (min-width: 800px) {
+  .steps {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 3rem;
   }
 }
 @media (hover: hover) {
@@ -921,6 +919,21 @@ section {
   cursor: ew-resize;
   touch-action: pan-y; /* scroll vertical normal, arrastre horizontal mueve el divisor */
   box-shadow: 10px 12px 0 var(--pink);
+}
+/* las dos cuentas están cargadas siempre; al cambiar solo se hace un fundido */
+.ba__set {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s,
+    visibility 0s 0.35s;
+}
+.ba__set.is-on {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s;
 }
 .ba__img {
   position: absolute;
@@ -1316,86 +1329,6 @@ section {
   height: auto;
 }
 
-/* ---------- mobile: las fotos pasan a ser fondo (el texto siempre queda arriba) ---------- */
-@media (max-width: 899px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr);
-    align-content: start;
-    padding-bottom: 3.5rem;
-  }
-  .hero__stage {
-    position: absolute;
-    right: -30%;
-    bottom: 0;
-    width: min(125vw, 620px);
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero__back,
-  .hero__photo {
-    opacity: 0.42;
-  }
-  /* suaviza el corte recto del lado izquierdo de la foto */
-  .hero__photo,
-  .delegate__photo,
-  .process__laptop,
-  .cta__photo {
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16%);
-    mask-image: linear-gradient(90deg, transparent 0, #000 16%);
-  }
-  .hero__kicker,
-  .hero__title,
-  .hero__sub {
-    text-shadow: 0 2px 22px rgba(39, 59, 9, 0.75);
-  }
-
-  .process__inner {
-    position: relative;
-  }
-  .process__media {
-    position: absolute;
-    top: -1rem;
-    right: -22%;
-    width: min(100vw, 460px);
-    opacity: 0.4;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .process__body {
-    position: relative;
-    z-index: 1;
-  }
-
-  .cta {
-    padding-bottom: 3rem;
-  }
-  .cta .cta__stage {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: min(115vw, 540px);
-    margin: 0;
-    transform: translateX(-50%);
-    opacity: 0.38;
-    z-index: 0;
-    pointer-events: none;
-  }
-}
-@media (max-width: 799px) {
-  .delegate__photo {
-    position: absolute;
-    right: -14%;
-    bottom: 0;
-    width: min(112%, 520px);
-    z-index: -1;
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  .checks {
-    padding-bottom: 3.2rem;
-  }
-}
-
 /* ---------- desktop: cierre en dos columnas (texto + foto, sin taparse) ---------- */
 @media (min-width: 900px) {
   .cta {
@@ -1463,6 +1396,18 @@ section {
 }
 .footer a {
   font-weight: 600;
+}
+.footer__credit {
+  flex-basis: 100%;
+  text-align: center;
+  padding-top: 0.9rem;
+  margin-top: 0.3rem;
+  border-top: 1px solid rgba(39, 59, 9, 0.25);
+  font-size: 0.8rem;
+}
+.footer__credit a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 /* ---------- movimiento reducido ---------- */
