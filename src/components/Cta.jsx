@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { gsap, useGSAP, parallax, revealWords, OK, FINE } from '../lib/motion'
 import SplitWords from './SplitWords'
-import { Flower, Arrow, Camera } from './Doodles'
+import { Flower, Arrow, Camera, WhatsAppIcon } from './Doodles'
 import { SITE } from '../config'
 import mate from '../assets/img/minna-mate.webp'
 
@@ -107,6 +107,10 @@ export default function Cta() {
           por MD
         </span>
         <Arrow className="cta__arrow" />
+      </a>
+
+      <a className="btn btn--ghost cta__wa" href={SITE.whatsapp} target="_blank" rel="noreferrer">
+        <WhatsAppIcon /> Escribime por WhatsApp
       </a>
 
       <ul className="contact">

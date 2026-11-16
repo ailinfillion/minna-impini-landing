@@ -73,6 +73,14 @@ export const Chart = (p) => (
   </svg>
 )
 
+// globo de chat con teléfono (genérico, hereda el color del texto)
+export const WhatsAppIcon = (p) => (
+  <svg {...base} strokeWidth={7} className="wa-icon" {...p}>
+    <path d="M50 12 C28 12 12 29 12 50 C12 58 14 64 18 70 L12 88 L31 83 C37 87 43 88 50 88 C72 88 88 71 88 50 C88 29 72 12 50 12 Z" />
+    <path d="M38 36 C36 42 40 52 49 60 C57 67 64 68 67 64 L67 60 L60 56 L56 59 C52 57 46 51 44 46 L47 42 L43 35 Z" />
+  </svg>
+)
+
 export const Arrow = (p) => (
   <svg {...base} {...p}>
     <path d="M14 50 H84 M60 26 L86 50 L60 74" />

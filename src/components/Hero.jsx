@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap, useGSAP, parallax, OK, FINE } from '../lib/motion'
 import SplitWords from './SplitWords'
-import { Flower, Squiggle, Star, Heart, Spiral, Camera, Chart } from './Doodles'
+import { Flower, Squiggle, Star, Heart, Spiral, Camera, Chart, WhatsAppIcon } from './Doodles'
 import { SITE } from '../config'
 import wordmark from '../assets/img/wordmark.png'
 import saludo from '../assets/img/minna-saludo.webp'
@@ -21,7 +21,7 @@ export default function Hero({ ready }) {
           .from('.hero__photo', { y: 90, opacity: 0, scale: 0.92, transformOrigin: '50% 100%', duration: 1.4, ease: 'expo.out' }, 0.25)
           .from('.hero__title .wi', { yPercent: 115, rotate: 6, duration: 1.1, stagger: 0.08 }, 0.2)
           .from('.hero__tag', { scale: 0, rotate: -25, duration: 0.9, ease: 'back.out(2)' }, '-=0.6')
-          .from('.hero__sub, .hero__cta', { y: 24, opacity: 0, duration: 0.9, stagger: 0.12, clearProps: 'all' }, '-=0.7')
+          .from('.hero__sub, .hero__actions', { y: 24, opacity: 0, duration: 0.9, stagger: 0.12, clearProps: 'all' }, '-=0.7')
           .from('.doodle', { scale: 0, opacity: 0, duration: 0.8, stagger: 0.07, ease: 'back.out(2.5)' }, '-=1.1')
         intro.current = t
 
@@ -75,9 +75,14 @@ export default function Hero({ ready }) {
         <SplitWords as="h1" className="hero__title" text="Vos ocupate de tu *negocio.*" mask />
         <p className="hero__tag">yo puedo ayudarte</p>
         <p className="hero__sub">Yo te ayudo a mantenerlo presente en Instagram.</p>
-        <a className="btn hero__cta" href={SITE.instagramDM} target="_blank" rel="noreferrer">
-          Consultas por MD
-        </a>
+        <div className="hero__actions">
+          <a className="btn" href={SITE.instagramDM} target="_blank" rel="noreferrer">
+            Consultas por MD
+          </a>
+          <a className="btn btn--ghost" href={SITE.whatsapp} target="_blank" rel="noreferrer">
+            <WhatsAppIcon /> WhatsApp
+          </a>
+        </div>
       </div>
 
       <div className="hero__stage" data-speed="-0.05">

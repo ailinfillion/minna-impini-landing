@@ -285,6 +285,33 @@ section {
   }
 }
 
+.btn--ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: transparent;
+  color: var(--cream);
+  box-shadow: inset 0 0 0 2px var(--cream);
+}
+.wa-icon {
+  width: 1.3em;
+  height: 1.3em;
+  flex: none;
+}
+@media (hover: hover) {
+  .btn--ghost:hover {
+    color: var(--green);
+  }
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.cta__wa {
+  margin-top: 1.4rem;
+}
+
 /* ---------- hero ---------- */
 .hero {
   min-height: 100svh;
@@ -1211,8 +1238,8 @@ section {
 .cta__camera {
   position: absolute !important;
   width: clamp(44px, 8vw, 80px);
-  top: 26%;
-  right: 7%;
+  top: 9%;
+  right: 8%;
   color: var(--lime);
 }
 .cta__title {
